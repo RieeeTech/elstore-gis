@@ -1,0 +1,4 @@
+CRITICAL - 2026-03-30 05:10:01 --> ErrorException: Cannot redeclare App\Controllers\Home::Polyline()
+[Method: GET, Route: Home/Circle]
+in APPPATH\Controllers\Home.php on line 59.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

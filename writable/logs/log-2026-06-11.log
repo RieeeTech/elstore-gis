@@ -1,0 +1,210 @@
+DEBUG - 2026-06-11 01:55:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 01:55:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:02:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:02:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-06-11 02:04:43 --> ErrorException: Undefined property: CodeIgniter\View\View::$request
+[Method: GET, Route: toko]
+in APPPATH\Views\pages\toko.php on line 244.
+ 1 APPPATH\Views\pages\toko.php(244): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$request', 'C:\\xampp\\htdocs\\elstore-gis\\app\\Views\\pages\\toko.php', 244)
+ 2 SYSTEMPATH\View\View.php(238): include('C:\\xampp\\htdocs\\elstore-gis\\app\\Views\\pages\\toko.php')
+ 3 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/toko', [], true)
+ 5 APPPATH\Controllers\Home.php(58): view('pages/toko', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Home->toko()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-06-11 02:04:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:04:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-06-11 02:04:55 --> TypeError: App\Controllers\Auth::login(): Return value must be of type string, CodeIgniter\HTTP\RedirectResponse returned
+[Method: GET, Route: auth/login]
+in APPPATH\Controllers\Auth.php on line 30.
+ 1 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-06-11 02:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:05:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:05:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-06-11 02:50:34 --> Table 'toko_elektronik' already exists
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('CREATE TABLE `toko_elektronik` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) UNSIGNED NULL COMMENT \'Pemilik toko (FK users.id)\',
+	`nama_toko` VARCHAR(150) NOT NULL,
+	`slug` VARCHAR(200) NULL,
+	`kategori` ENUM(\'Smartphone\',\'Komputer & Laptop\',\'Audio & Video\',\'Peralatan Listrik\',\'Elektronik Umum\',\'Apple Authorized\',\'Gaming\',\'Kamera & Optik\',\'Lainnya\') NOT NULL DEFAULT \'Elektronik Umum\',
+	`alamat` TEXT NOT NULL,
+	`kecamatan` VARCHAR(100) NULL,
+	`kota` VARCHAR(100) NOT NULL DEFAULT \'Kisaran\',
+	`provinsi` VARCHAR(100) NOT NULL DEFAULT \'Sumatera Utara\',
+	`latitude` DECIMAL(11,8) NOT NULL,
+	`longitude` DECIMAL(11,8) NOT NULL,
+	`no_telepon` VARCHAR(20) NULL,
+	`email_toko` VARCHAR(150) NULL,
+	`website` VARCHAR(255) NULL,
+	`jam_buka` VARCHAR(50) NULL COMMENT \'Contoh: 08:00-21:00\',
+	`deskripsi` TEXT NULL,
+	`foto` VARCHAR(255) NULL,
+	`rating` DECIMAL(3,1) NOT NULL DEFAULT \'0.0\',
+	`total_ulasan` INT NOT NULL DEFAULT 0,
+	`status` ENUM(\'aktif\',\'nonaktif\',\'pending\') NOT NULL DEFAULT \'aktif\',
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	`deleted_at` DATETIME NULL,
+	CONSTRAINT `pk_toko_elektronik` PRIMARY KEY(`id`),
+	KEY `user_id` (`user_id`),
+	KEY `kategori` (`kategori`),
+	KEY `status` (`status`),
+	KEY `latitude_longitude` (`latitude`, `longitude`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `toko_elektronik` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) UNSIGNED NULL COMMENT \'Pemilik toko (FK users.id)\',
+	`nama_toko` VARCHAR(150) NOT NULL,
+	`slug` VARCHAR(200) NULL,
+	`kategori` ENUM(\'Smartphone\',\'Komputer & Laptop\',\'Audio & Video\',\'Peralatan Listrik\',\'Elektronik Umum\',\'Apple Authorized\',\'Gaming\',\'Kamera & Optik\',\'Lainnya\') NOT NULL DEFAULT \'Elektronik Umum\',
+	`alamat` TEXT NOT NULL,
+	`kecamatan` VARCHAR(100) NULL,
+	`kota` VARCHAR(100) NOT NULL DEFAULT \'Kisaran\',
+	`provinsi` VARCHAR(100) NOT NULL DEFAULT \'Sumatera Utara\',
+	`latitude` DECIMAL(11,8) NOT NULL,
+	`longitude` DECIMAL(11,8) NOT NULL,
+	`no_telepon` VARCHAR(20) NULL,
+	`email_toko` VARCHAR(150) NULL,
+	`website` VARCHAR(255) NULL,
+	`jam_buka` VARCHAR(50) NULL COMMENT \'Contoh: 08:00-21:00\',
+	`deskripsi` TEXT NULL,
+	`foto` VARCHAR(255) NULL,
+	`rating` DECIMAL(3,1) NOT NULL DEFAULT \'0.0\',
+	`total_ulasan` INT NOT NULL DEFAULT 0,
+	`status` ENUM(\'aktif\',\'nonaktif\',\'pending\') NOT NULL DEFAULT \'aktif\',
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	`deleted_at` DATETIME NULL,
+	CONSTRAINT `pk_toko_elektronik` PRIMARY KEY(`id`),
+	KEY `user_id` (`user_id`),
+	KEY `kategori` (`kategori`),
+	KEY `status` (`status`),
+	KEY `latitude_longitude` (`latitude`, `longitude`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `toko_elektronik` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) UNSIGNED NULL COMMENT \'Pemilik toko (FK users.id)\',
+	`nama_toko` VARCHAR(150) NOT NULL,
+	`slug` VARCHAR(200) NULL,
+	`kategori` ENUM(\'Smartphone\',\'Komputer & Laptop\',\'Audio & Video\',\'Peralatan Listrik\',\'Elektronik Umum\',\'Apple Authorized\',\'Gaming\',\'Kamera & Optik\',\'Lainnya\') NOT NULL DEFAULT \'Elektronik Umum\',
+	`alamat` TEXT NOT NULL,
+	`kecamatan` VARCHAR(100) NULL,
+	`kota` VARCHAR(100) NOT NULL DEFAULT \'Kisaran\',
+	`provinsi` VARCHAR(100) NOT NULL DEFAULT \'Sumatera Utara\',
+	`latitude` DECIMAL(11,8) NOT NULL,
+	`longitude` DECIMAL(11,8) NOT NULL,
+	`no_telepon` VARCHAR(20) NULL,
+	`email_toko` VARCHAR(150) NULL,
+	`website` VARCHAR(255) NULL,
+	`jam_buka` VARCHAR(50) NULL COMMENT \'Contoh: 08:00-21:00\',
+	`deskripsi` TEXT NULL,
+	`foto` VARCHAR(255) NULL,
+	`rating` DECIMAL(3,1) NOT NULL DEFAULT \'0.0\',
+	`total_ulasan` INT NOT NULL DEFAULT 0,
+	`status` ENUM(\'aktif\',\'nonaktif\',\'pending\') NOT NULL DEFAULT \'aktif\',
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	`deleted_at` DATETIME NULL,
+	CONSTRAINT `pk_toko_elektronik` PRIMARY KEY(`id`),
+	KEY `user_id` (`user_id`),
+	KEY `kategori` (`kategori`),
+	KEY `status` (`status`),
+	KEY `latitude_longitude` (`latitude`, `longitude`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `toko_elektronik` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) UNSIGNED NULL COMMENT \'Pemilik toko (FK users.id)\',
+	`nama_toko` VARCHAR(150) NOT NULL,
+	`slug` VARCHAR(200) NULL,
+	`kategori` ENUM(\'Smartphone\',\'Komputer & Laptop\',\'Audio & Video\',\'Peralatan Listrik\',\'Elektronik Umum\',\'Apple Authorized\',\'Gaming\',\'Kamera & Optik\',\'Lainnya\') NOT NULL DEFAULT \'Elektronik Umum\',
+	`alamat` TEXT NOT NULL,
+	`kecamatan` VARCHAR(100) NULL,
+	`kota` VARCHAR(100) NOT NULL DEFAULT \'Kisaran\',
+	`provinsi` VARCHAR(100) NOT NULL DEFAULT \'Sumatera Utara\',
+	`latitude` DECIMAL(11,8) NOT NULL,
+	`longitude` DECIMAL(11,8) NOT NULL,
+	`no_telepon` VARCHAR(20) NULL,
+	`email_toko` VARCHAR(150) NULL,
+	`website` VARCHAR(255) NULL,
+	`jam_buka` VARCHAR(50) NULL COMMENT \'Contoh: 08:00-21:00\',
+	`deskripsi` TEXT NULL,
+	`foto` VARCHAR(255) NULL,
+	`rating` DECIMAL(3,1) NOT NULL DEFAULT \'0.0\',
+	`total_ulasan` INT NOT NULL DEFAULT 0,
+	`status` ENUM(\'aktif\',\'nonaktif\',\'pending\') NOT NULL DEFAULT \'aktif\',
+	`created_at` DATETIME NULL,
+	`updated_at` DATETIME NULL,
+	`deleted_at` DATETIME NULL,
+	CONSTRAINT `pk_toko_elektronik` PRIMARY KEY(`id`),
+	KEY `user_id` (`user_id`),
+	KEY `kategori` (`kategori`),
+	KEY `status` (`status`),
+	KEY `latitude_longitude` (`latitude`, `longitude`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH\Database\Migrations\2026-06-09-000001_CreateStoresTable.php(137): CodeIgniter\Database\Forge->createTable('toko_elektronik')
+ 6 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\CreateStoresTable->up()
+ 7 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+DEBUG - 2026-06-11 02:56:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-06-11 02:57:07 --> ErrorException: Undefined property: CodeIgniter\View\View::$request
+[Method: GET, Route: toko]
+in APPPATH\Views\pages\toko.php on line 244.
+ 1 APPPATH\Views\pages\toko.php(244): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$request', 'C:\\xampp\\htdocs\\elstore-gis\\app\\Views\\pages\\toko.php', 244)
+ 2 SYSTEMPATH\View\View.php(238): include('C:\\xampp\\htdocs\\elstore-gis\\app\\Views\\pages\\toko.php')
+ 3 SYSTEMPATH\View\View.php(241): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('pages/toko', [], true)
+ 5 APPPATH\Controllers\Home.php(68): view('pages/toko', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Home->toko()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-06-11 02:57:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-06-11 02:57:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-06-11 02:57:56 --> TypeError: App\Controllers\Auth::register(): Return value must be of type string, CodeIgniter\HTTP\RedirectResponse returned
+[Method: GET, Route: auth/register]
+in APPPATH\Controllers\Auth.php on line 126.
+ 1 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Auth->register()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-06-11 02:57:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
