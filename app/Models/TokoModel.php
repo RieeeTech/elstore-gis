@@ -53,6 +53,22 @@ class TokoModel extends Model
     }
 
     // ----------------------------------------------------------------
+    /** Mendapatkan daftar kota yang unik */
+    public function getUniqueCities(): array
+    {
+        return $this->db
+                    ->table($this->table)
+                    ->select('kota')
+                    ->where('status', 'aktif')
+                    ->where('deleted_at IS NULL')
+                    ->where('kota !=', '')
+                    ->groupBy('kota')
+                    ->orderBy('kota', 'ASC')
+                    ->get()
+                    ->getResultArray();
+    }
+
+    // ----------------------------------------------------------------
     /** Toko milik pemilik tertentu */
     public function getByOwner(int $userId): array
     {

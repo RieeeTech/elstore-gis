@@ -55,7 +55,7 @@
 </div>
 
 <!-- Grid Row -->
-<div style="display:grid; grid-template-columns:1.4fr 1fr; gap:20px; margin-bottom:20px;">
+<div class="content-grid">
 
   <!-- Toko Terbaru -->
   <div class="dash-card">

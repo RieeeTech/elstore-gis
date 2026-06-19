@@ -5,14 +5,13 @@
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /elstore-gis/
 
     # Jangan redirect untuk file/folder yang benar-benar ada
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    # Arahkan semua request ke index.php
-    RewriteRule ^(.*)$ index.php/$1 [L]
+    # Arahkan semua request ke index.php dengan Query String (?)
+    RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
 </IfModule>
 
 <IfModule !mod_rewrite.c>

@@ -9,6 +9,65 @@ $formAction = match($role) {
 ?>
 <?php echo view('templates/dashboard_header', $data ?? []); ?>
 
+<style>
+  .profil-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    align-items: start;
+    max-width: 800px;
+  }
+  .profile-card {
+    text-align: center;
+  }
+  .profil-info-list {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .profil-info-list div {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .profil-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    word-break: break-all;
+  }
+  .profil-info-item i {
+    color: var(--primary);
+    width: 16px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 640px) {
+    .profil-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .profil-info-list {
+      width: 100%;
+    }
+    .profil-info-list div {
+      align-items: flex-start;
+    }
+    .profil-page-title {
+      font-size: clamp(16px, 4vw, 22px) !important;
+    }
+  }
+</style>
+
 <?php if (session()->getFlashdata('success')): ?>
   <div class="flash-alert flash-success"><i class="fas fa-circle-check"></i> <?php echo session()->getFlashdata('success'); ?></div>
 <?php endif; ?>
@@ -17,9 +76,9 @@ $formAction = match($role) {
 <?php endif; ?>
 
 <div style="max-width:800px;">
-  <h1 style="font-family:var(--font-display);font-size:22px;font-weight:900;margin-bottom:20px;">Profil Saya</h1>
+  <h1 class="profil-page-title" style="font-family:var(--font-display);font-size:22px;font-weight:900;margin-bottom:20px;">Profil Saya</h1>
 
-  <div style="display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start;">
+  <div class="profil-grid">
     <!-- Profile Card -->
     <div class="profile-card">
       <div class="profile-avatar">
@@ -34,16 +93,14 @@ $formAction = match($role) {
         }; ?>
       </div>
 
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
-        <div style="font-size:12px;color:var(--text-muted);text-align:left;display:flex;flex-direction:column;gap:8px;">
-          <div><i class="fas fa-at" style="color:var(--primary);width:16px;"></i> <?php echo esc($user['username']); ?></div>
-          <div><i class="fas fa-envelope" style="color:var(--primary);width:16px;"></i> <?php echo esc($user['email']); ?></div>
+      <div class="profil-info-list">
+        <div>
+          <div class="profil-info-item"><i class="fas fa-at"></i> <?php echo esc($user['username']); ?></div>
+          <div class="profil-info-item"><i class="fas fa-envelope"></i> <?php echo esc($user['email']); ?></div>
           <?php if (!empty($user['no_hp'])): ?>
-          <div><i class="fas fa-phone" style="color:var(--primary);width:16px;"></i> <?php echo esc($user['no_hp']); ?></div>
+          <div class="profil-info-item"><i class="fas fa-phone"></i> <?php echo esc($user['no_hp']); ?></div>
           <?php endif; ?>
-          <div><i class="fas fa-calendar" style="color:var(--primary);width:16px;"></i>
-            Bergabung <?php echo date('d M Y', strtotime($user['created_at'])); ?>
-          </div>
+          <div class="profil-info-item"><i class="fas fa-calendar"></i> Bergabung <?php echo date('d M Y', strtotime($user['created_at'])); ?></div>
         </div>
       </div>
 
@@ -111,3 +168,4 @@ $formAction = match($role) {
 </div>
 
 <?= view('templates/dashboard_footer'); ?>
+

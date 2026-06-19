@@ -1,91 +1,109 @@
 <style>
   /* =============================================
-     FOOTER STYLES
+     FOOTER STYLES (Single Dark Card)
   ============================================= */
   #siteFooter {
-    background: var(--dark);
-    color: rgba(255,255,255,0.65);
-    padding: 72px 0 0;
+    background: #05060f;
+    padding: 32px 24px 0; 
+    overflow: hidden;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 48px 0; 
+    background: #0f172a; /* Dark card background */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: none;
+    border-radius: 32px 32px 0 0;
   }
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 56px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    grid-template-columns: 2fr 1fr 1.5fr; /* 3 Columns */
+    gap: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
   }
 
   /* Brand column */
-  .footer-brand .nav-brand { margin-bottom: 16px; }
-  .footer-brand .brand-name { font-size: 20px; }
+  .footer-brand .nav-brand { margin-bottom: 16px; align-items: center; display:inline-flex; text-decoration:none; }
+  .footer-brand .brand-name { font-family: var(--font-display, 'Outfit', sans-serif); font-size: 24px; color: #f8fafc; font-weight: 800; }
+  .footer-brand .brand-name .accent { color: #60a5fa; }
+  .footer-brand .brand-logo { color: #60a5fa; font-size: 26px; margin-right: 12px; }
   .footer-brand p {
     font-size: 14px;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+    color: #94a3b8;
     margin-bottom: 24px;
+    margin-top: 0;
   }
 
   .social-links {
     display: flex;
-    gap: 10px;
+    gap: 12px;
   }
 
   .social-link {
     width: 38px; height: 38px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.55);
+    color: #94a3b8;
     font-size: 15px;
-    transition: all var(--transition-smooth);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-decoration: none;
   }
 
   .social-link:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
+    background: rgba(96,165,250,0.1);
+    border-color: #60a5fa;
+    color: #60a5fa;
     transform: translateY(-3px);
-    box-shadow: 0 6px 18px var(--primary-glow);
+    box-shadow: 0 6px 16px rgba(96,165,250,0.25);
   }
 
   /* Link columns */
   .footer-col h4 {
-    font-family: var(--font-display);
-    font-size: 14px;
+    font-family: var(--font-display, 'Outfit', sans-serif);
+    font-size: 16px;
     font-weight: 800;
-    color: #fff;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    color: #f8fafc;
     margin-bottom: 20px;
+    margin-top: 0;
   }
 
-  .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul { display: flex; flex-direction: column; gap: 12px; list-style: none; padding:0; margin:0; }
 
   .footer-col a {
     font-size: 14px;
-    color: rgba(255,255,255,0.5);
+    color: #94a3b8;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: all var(--transition-fast);
+    gap: 10px;
+    transition: all 0.2s ease;
+    text-decoration: none;
   }
 
   .footer-col a i {
     font-size: 11px;
-    color: var(--primary-light);
-    transition: transform var(--transition-fast);
+    color: #334155;
+    transition: all 0.2s ease;
   }
 
   .footer-col a:hover {
-    color: #fff;
-    padding-left: 4px;
+    color: #60a5fa;
+    transform: translateX(4px);
   }
 
-  .footer-col a:hover i { transform: translateX(3px); }
+  .footer-col a:hover i { 
+    color: #60a5fa; 
+  }
 
   /* Contact column */
   .contact-item {
@@ -96,16 +114,18 @@
   }
 
   .contact-item i {
-    color: var(--primary-light);
-    font-size: 14px;
-    margin-top: 2px;
+    color: #60a5fa;
+    font-size: 15px;
+    margin-top: 4px;
     flex-shrink: 0;
+    width: 20px;
+    text-align: center;
   }
 
   .contact-item span {
     font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.5;
+    color: #94a3b8;
+    line-height: 1.6;
   }
 
   /* Bottom bar */
@@ -115,15 +135,16 @@
     justify-content: space-between;
     padding: 20px 0;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
   }
 
   .footer-bottom p {
     font-size: 13px;
-    color: rgba(255,255,255,0.35);
+    color: #64748b;
+    margin: 0;
   }
 
-  .footer-bottom p span { color: var(--primary-light); }
+  .footer-bottom p span { color: #60a5fa; font-weight: 600; }
 
   .footer-bottom-links {
     display: flex;
@@ -132,32 +153,35 @@
 
   .footer-bottom-links a {
     font-size: 13px;
-    color: rgba(255,255,255,0.35);
-    transition: color var(--transition-fast);
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
 
-  .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+  .footer-bottom-links a:hover { color: #cbd5e1; }
 
   /* Back to Top */
   #backToTop {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    width: 46px; height: 46px;
-    background: var(--primary);
-    color: #fff;
-    border-radius: 50%;
+    bottom: 24px;
+    right: 24px;
+    width: 44px; height: 44px;
+    background: rgba(15,23,42,0.6);
+    color: #60a5fa;
+    border: 1px solid rgba(96,165,250,0.3);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    box-shadow: 0 6px 20px var(--primary-glow);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     cursor: pointer;
     z-index: 900;
     opacity: 0;
     transform: translateY(20px) scale(0.8);
-    transition: all var(--transition-smooth);
-    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   #backToTop.visible {
@@ -166,8 +190,10 @@
   }
 
   #backToTop:hover {
-    background: var(--primary-dark);
-    transform: translateY(-3px) scale(1.08);
+    background: #60a5fa;
+    color: #0f172a;
+    box-shadow: 0 8px 24px rgba(96,165,250,0.4);
+    transform: translateY(-4px) scale(1.05);
   }
 
   /* ---- Responsive ---- */
@@ -177,7 +203,7 @@
 
   @media (max-width: 600px) {
     .footer-grid { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; text-align: center; }
+    .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
   }
 </style>
 
@@ -186,12 +212,12 @@
      FOOTER
 ================================================ -->
 <footer id="siteFooter" id="kontak">
-  <div class="container">
+  <div class="footer-container">
     <div class="footer-grid">
 
       <!-- Brand Column -->
-      <div class="footer-brand">
-        <a href="<?php echo base_url(); ?>" class="nav-brand" style="display:inline-flex; margin-bottom:16px;">
+      <div class="footer-brand" data-aos="fade-up">
+        <a href="<?php echo base_url('#beranda'); ?>" class="nav-brand">
           <div class="brand-logo">
             <i class="fas fa-map-location-dot"></i>
           </div>
@@ -212,26 +238,14 @@
           <a href="#" class="social-link" aria-label="YouTube">
             <i class="fab fa-youtube"></i>
           </a>
-          <a href="#" class="social-link" aria-label="GitHub">
+          <a href="https://github.com/RieeeTech" class="social-link" aria-label="GitHub">
             <i class="fab fa-github"></i>
           </a>
         </div>
       </div>
 
-      <!-- Quick Links -->
-      <div class="footer-col">
-        <h4 data-i18n="footer_nav">Navigasi</h4>
-        <ul>
-          <li><a href="#beranda"><i class="fas fa-chevron-right"></i><span data-i18n="nav_home">Beranda</span></a></li>
-          <li><a href="#tentang"><i class="fas fa-chevron-right"></i><span data-i18n="nav_about">Tentang</span></a></li>
-          <li><a href="#peta"><i class="fas fa-chevron-right"></i><span data-i18n="nav_map">Peta GIS</span></a></li>
-          <li><a href="#toko"><i class="fas fa-chevron-right"></i><span data-i18n="nav_stores">Toko</span></a></li>
-          <li><a href="#ulasan"><i class="fas fa-chevron-right"></i><span data-i18n="nav_reviews">Ulasan</span></a></li>
-        </ul>
-      </div>
-
       <!-- Layanan -->
-      <div class="footer-col">
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
         <h4 data-i18n="footer_service">Layanan</h4>
         <ul>
           <li><a href="<?php echo base_url('peta'); ?>"><i class="fas fa-chevron-right"></i><span data-i18n="svc_map">Peta Interaktif</span></a></li>
@@ -243,7 +257,7 @@
       </div>
 
       <!-- Kontak -->
-      <div class="footer-col">
+      <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
         <h4 data-i18n="footer_contact">Kontak</h4>
         <div class="contact-item">
           <i class="fas fa-location-dot"></i>
@@ -265,7 +279,7 @@
     </div><!-- /.footer-grid -->
 
     <!-- Bottom Bar -->
-    <div class="footer-bottom">
+    <div class="footer-bottom" data-aos="fade-up" data-aos-offset="0">
       <p data-i18n="footer_copy">
         &copy; <?php echo date('Y'); ?> <span>ELStore GIS</span> — Universitas Royal. Hak Cipta Dilindungi.
       </p>
@@ -279,7 +293,7 @@
 </footer>
 
 <!-- Back to Top -->
-<button id="backToTop" title="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<button id="backToTop" title="Kembali ke atas" aria-label="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <i class="fas fa-chevron-up"></i>
 </button>
 

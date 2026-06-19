@@ -16,7 +16,7 @@ $routes->set404Override();
 // Public routes
 // ---------------------------------------------------------------
 $routes->get('/',              'Home::index');
-$routes->get('/peta',          'Home::peta');
+$routes->get('/peta',          'Home::peta', ['filter' => 'auth']);
 $routes->get('/toko',          'Home::toko', ['filter' => 'auth']);
 $routes->get('/toko/(:num)',   'Home::tokoDetail/$1', ['filter' => 'auth']);
 
@@ -35,8 +35,12 @@ $routes->post('/submit-rating', 'Home::submitRating');
 $routes->group('auth', function ($routes) {
     $routes->get('login',             'Auth::login');
     $routes->post('login-process',    'Auth::loginProcess');
+    $routes->get('login-process',     'Auth::login'); // Fallback InfinityFree
+    
     $routes->get('register',          'Auth::register');
     $routes->post('register-process', 'Auth::registerProcess');
+    $routes->get('register-process',  'Auth::register'); // Fallback InfinityFree
+    
     $routes->get('logout',            'Auth::logout');
     $routes->get('forgot-password',   'Auth::forgotPassword');
 });

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ELStore GIS — <?php echo isset($page_title) ? esc($page_title) : 'Dashboard'; ?></title>
   <meta name="description" content="Dashboard ELStore GIS - Sistem Informasi Geografis Toko Elektronik Sumatera Utara">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="<?php echo base_url('favicon.svg'); ?>">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,6 +81,7 @@
       width: var(--sidebar-w);
       background: var(--sidebar-bg);
       height: 100vh;
+      height: 100dvh; /* Dynamic viewport height — fixes iOS browser chrome */
       position: fixed;
       top: 0; left: 0;
       bottom: 0;
@@ -194,7 +198,10 @@
     /* Sidebar footer (user info) */
     .sb-footer {
       padding: 16px 20px;
+      /* Tambah ruang aman untuk navigation bar iPhone/iOS */
+      padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
       border-top: 1px solid rgba(255,255,255,0.06);
+      flex-shrink: 0; /* Jangan pernah dikompres */
     }
 
     .sb-user {
@@ -246,9 +253,11 @@
     #main {
       margin-left: var(--sidebar-w);
       flex: 1;
+      min-width: 0; /* Crucial for responsive flex children */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
     /* Top header bar */
@@ -270,6 +279,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      min-width: 0; /* Let breadcrumbs shrink */
     }
 
     .menu-toggle {
@@ -282,25 +292,29 @@
       justify-content: center;
       font-size: 16px;
       color: var(--text-secondary);
+      flex-shrink: 0;
     }
 
     .page-title-bar {
       font-family: var(--font-display);
-      font-size: 18px;
+      font-size: clamp(14px, 4vw, 18px);
       font-weight: 800;
       color: var(--text-primary);
+      line-height: 1.2;
     }
 
     .page-breadcrumb {
-      font-size: 12px;
+      font-size: clamp(10px, 2.5vw, 12px);
       color: var(--text-muted);
-      margin-top: 1px;
+      margin-top: 2px;
+      line-height: 1.2;
     }
 
     .dh-right {
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-shrink: 0;
     }
 
     .dh-btn {
@@ -315,6 +329,7 @@
       font-weight: 600;
       font-family: var(--font-display);
       transition: all var(--transition);
+      white-space: nowrap;
     }
     .dh-btn:hover {
       background: var(--primary-dark);
@@ -326,6 +341,8 @@
     .page-content {
       padding: 28px;
       flex: 1;
+      min-width: 0; /* Crucial for responsive inner content */
+      width: 100%;
     }
 
     /* ========== FLASH ALERTS ========== */
@@ -348,7 +365,14 @@
     .flash-error   { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; }
     .flash-warning { background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }
 
-    /* ========== STAT CARDS ========== */
+    /* ========== STAT CARDS & GRID ========== */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -533,6 +557,7 @@
       color: var(--text-secondary);
       border-bottom: 1px solid var(--border);
       vertical-align: middle;
+      white-space: nowrap;
     }
 
     table tbody tr:last-child td { border-bottom: none; }
@@ -716,6 +741,9 @@
     }
 
     /* ========== RESPONSIVE ========== */
+    .dataTables_wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dataTables_wrapper .dataTables_paginate { margin-top: 10px; }
+
     @media (max-width: 992px) {
       #sidebar {
         transform: translateX(-100%);
@@ -730,11 +758,20 @@
       .menu-toggle { display: flex; }
       .form-grid { grid-template-columns: 1fr; }
       .form-grid .col-span-2 { grid-column: span 1; }
+      .content-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .dh-right .dh-btn { padding: 6px 10px; font-size: 12px; }
+      .stats-grid { grid-template-columns: 1fr; gap: 16px; }
+      #dashHeader { height: auto; min-height: var(--header-h); padding: 12px 20px; }
     }
 
     @media (max-width: 600px) {
       .page-content { padding: 16px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .dh-right { display: none; } /* Hide top right buttons, already in sidebar */
+      .stats-grid { grid-template-columns: 1fr; }
+      .profile-card { padding: 20px; }
     }
 
     @media (max-width: 400px) {

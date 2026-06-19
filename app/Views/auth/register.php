@@ -11,15 +11,15 @@
     :root {
       --primary:       #2563EB;
       --primary-light: #60A5FA;
-      --primary-dark:  #1D4ED8;
-      --primary-glow:  rgba(37,99,235,0.4);
-      --dark:          #0A0F1E;
-      --surface:       #FFFFFF;
-      --surface-2:     #F8FAFC;
-      --border:        #E2E8F0;
-      --text:          #0F172A;
-      --text-2:        #475569;
-      --text-3:        #94A3B8;
+      --dark:          #05060f;
+      --dark-2:        #0f172a;
+      --dark-3:        #1e2d4a;
+      --surface:       #05060f;
+      --surface-2:     rgba(255, 255, 255, 0.03);
+      --border:        rgba(255, 255, 255, 0.1);
+      --text:          #f8fafc;
+      --text-2:        #94a3b8;
+      --text-3:        #64748b;
       --error:         #EF4444;
       --success:       #22C55E;
       --font-d: 'Outfit', sans-serif;
@@ -233,10 +233,13 @@
     .auth-right {
       width: 580px;
       flex-shrink: 0;
-      background: var(--surface);
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
-      padding: 48px 52px;
+      padding: 56px 52px;
       position: relative;
       overflow-y: auto;
     }
@@ -421,11 +424,16 @@
       background-position: right 14px center;
     }
 
+    .form-group select option {
+      background: var(--dark-2);
+      color: var(--text);
+    }
+
     .form-group input:focus,
     .form-group select:focus {
-      border-color: var(--primary);
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+      border-color: var(--primary-light);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 0 4px rgba(96,165,250,0.15);
     }
 
     .form-group input:focus ~ .input-icon,
@@ -734,8 +742,8 @@
     <div class="form-step">LANGKAH <span id="stepNum">1</span> DARI 3</div>
     <h1 class="form-title" data-i18n="auth_register_title">Daftar Akun Baru</h1>
     <p class="form-sub">
-      Sudah punya akun?
-      <a href="<?= base_url('auth/login') ?>">Masuk di sini</a>
+      <span data-i18n="sub_reg">Sudah punya akun?</span>
+      <a href="<?= base_url('auth/login') ?>" data-i18n="sub_reg_link">Masuk di sini</a>
     </p>
   </div>
 

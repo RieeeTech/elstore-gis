@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ELStore GIS — <?php echo isset($page_title) ? $page_title : 'Sistem Informasi Geografis'; ?></title>
   <meta name="description" content="Sistem Informasi Geografis Pemetaan Toko Elektronik Sumatera Utara — Kota Kisaran, Asahan">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="<?php echo base_url('favicon.svg'); ?>">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -406,14 +408,14 @@
 
     <!-- Desktop Nav Links -->
     <ul class="nav-links">
-      <li><a href="#beranda"  class="active" data-i18n="nav_home">Beranda</a></li>
-      <li><a href="#tentang"  data-i18n="nav_about">Tentang</a></li>
-      <li><a href="#peta"     data-i18n="nav_map">Peta GIS</a></li>
+      <li><a href="<?= base_url('#beranda') ?>"  class="active" data-i18n="nav_home">Beranda</a></li>
+      <li><a href="<?= base_url('#tentang') ?>"  data-i18n="nav_about">Tentang</a></li>
+      <li><a href="<?= base_url('#peta') ?>"     data-i18n="nav_map">Peta GIS</a></li>
       <?php if (session()->get('is_logged_in')): ?>
-        <li><a href="#toko"     data-i18n="nav_stores">Toko</a></li>
+        <li><a href="<?= base_url('#toko') ?>" data-i18n="nav_stores">Toko</a></li>
       <?php endif; ?>
-      <li><a href="#ulasan"   data-i18n="nav_reviews">Ulasan</a></li>
-      <li><a href="#kontak"   data-i18n="nav_contact">Kontak</a></li>
+      <li><a href="<?= base_url('#ulasan') ?>"   data-i18n="nav_reviews">Ulasan</a></li>
+      <li><a href="<?= base_url('#siteFooter') ?>"   data-i18n="nav_contact">Kontak</a></li>
     </ul>
 
     <!-- Actions: Language + Login + Hamburger -->
@@ -463,14 +465,14 @@
      MOBILE DRAWER
 ============================================= -->
 <div id="mobileDrawer" aria-hidden="true">
-  <a href="#beranda" onclick="closeDrawer()" data-i18n="nav_home">🏠&nbsp; Beranda</a>
-  <a href="#tentang" onclick="closeDrawer()" data-i18n="nav_about">ℹ️&nbsp; Tentang</a>
-  <a href="#peta"    onclick="closeDrawer()" data-i18n="nav_map">🗺️&nbsp; Peta GIS</a>
+  <a href="<?= base_url('#beranda') ?>" onclick="closeDrawer()" data-i18n="nav_home">&nbsp; Beranda</a>
+  <a href="<?= base_url('#tentang') ?>" onclick="closeDrawer()" data-i18n="nav_about">&nbsp; Tentang</a>
+  <a href="<?= base_url('#peta') ?>"    onclick="closeDrawer()" data-i18n="nav_map">&nbsp; Peta GIS</a>
   <?php if (session()->get('is_logged_in')): ?>
-    <a href="#toko"    onclick="closeDrawer()" data-i18n="nav_stores">🏪&nbsp; Toko</a>
+    <a href="<?= base_url('#toko') ?>"    onclick="closeDrawer()" data-i18n="nav_stores">&nbsp; Toko</a>
   <?php endif; ?>
-  <a href="#ulasan"  onclick="closeDrawer()" data-i18n="nav_reviews">⭐&nbsp; Ulasan</a>
-  <a href="#kontak"  onclick="closeDrawer()" data-i18n="nav_contact">📞&nbsp; Kontak</a>
+  <a href="<?= base_url('#ulasan') ?>"  onclick="closeDrawer()" data-i18n="nav_reviews">&nbsp; Ulasan</a>
+  <a href="<?= base_url('#siteFooter') ?>"  onclick="closeDrawer()" data-i18n="nav_contact">&nbsp; Kontak</a>
 
   <div class="drawer-footer">
 

@@ -13,15 +13,15 @@
       --primary-light: #60A5FA;
       --primary-dark:  #1D4ED8;
       --primary-glow:  rgba(37,99,235,0.4);
-      --dark:          #0A0F1E;
-      --dark-2:        #111827;
+      --dark:          #05060f;
+      --dark-2:        #0f172a;
       --dark-3:        #1e2d4a;
-      --surface:       #FFFFFF;
-      --surface-2:     #F8FAFC;
-      --border:        #E2E8F0;
-      --text:          #0F172A;
-      --text-2:        #475569;
-      --text-3:        #94A3B8;
+      --surface:       #05060f;
+      --surface-2:     rgba(255, 255, 255, 0.03);
+      --border:        rgba(255, 255, 255, 0.1);
+      --text:          #f8fafc;
+      --text-2:        #94a3b8;
+      --text-3:        #64748b;
       --error:         #EF4444;
       --success:       #22C55E;
       --font-d: 'Outfit', sans-serif;
@@ -235,7 +235,10 @@
     .auth-right {
       width: 520px;
       flex-shrink: 0;
-      background: var(--surface);
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
       padding: 56px 52px;
@@ -300,7 +303,7 @@
       margin-bottom: 8px;
     }
 
-    .form-sub {
+    .form-head .form-sub {
       font-size: 15px;
       color: var(--text-2);
     }
@@ -368,9 +371,9 @@
     }
 
     .form-group input:focus {
-      border-color: var(--primary);
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(37,99,235,0.10);
+      border-color: var(--primary-light);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 0 4px rgba(96,165,250,0.15);
     }
 
     .form-group input:focus + .input-icon,
@@ -643,7 +646,7 @@
   <div class="form-head">
     <div class="form-step" data-i18n="step">SELAMAT DATANG KEMBALI</div>
     <h1 class="form-title" data-i18n="auth_login_title">Masuk ke Akun</h1>
-    <p class="form-subtitle">
+    <p class="form-sub">
       <span data-i18n="sub">Belum punya akun?</span>
       <a href="<?= base_url('auth/register') ?>" data-i18n="sub_link">Daftar sekarang</a>
     </p>

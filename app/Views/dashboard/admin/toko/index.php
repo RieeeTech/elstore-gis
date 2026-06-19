@@ -59,7 +59,9 @@
           <tr>
             <td style="color:var(--text-muted);"><?php echo $no++; ?></td>
             <td>
-              <div style="font-weight:700;color:var(--text-primary);"><?php echo esc($t['nama_toko']); ?></div>
+              <a href="javascript:void(0)" onclick="showTinyPopup(event, '<?php echo !empty($t['foto']) ? base_url('foto/'.$t['foto']) : ''; ?>')" style="font-weight:700;color:var(--text-primary);text-decoration:none;" title="Klik untuk melihat foto">
+                <?php echo esc($t['nama_toko']); ?>
+              </a>
               <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">
                 <i class="fas fa-location-dot" style="color:var(--primary);"></i>
                 <?php echo esc($t['kecamatan'] ?? $t['kota']); ?>
@@ -127,6 +129,42 @@ function filterTable() {
     row.style.display = row.textContent.toLowerCase().includes(input) ? '' : 'none';
   });
 }
+
+function showTinyPopup(event, fotoUrl) {
+  event.preventDefault();
+  event.stopPropagation();
+  const popup = document.getElementById('tinyPopup');
+  const img = document.getElementById('tinyPopupImg');
+  const noImg = document.getElementById('tinyPopupNoImg');
+  
+  if (fotoUrl) {
+    img.src = fotoUrl;
+    img.style.display = 'block';
+    noImg.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    noImg.style.display = 'block';
+  }
+  
+  // Position near cursor
+  popup.style.left = (event.clientX + 15) + 'px';
+  popup.style.top = (event.clientY + 15) + 'px';
+  popup.style.display = 'block';
+  
+  // Listen for outside click to close
+  document.addEventListener('click', hideTinyPopup);
+}
+
+function hideTinyPopup() {
+  document.getElementById('tinyPopup').style.display = 'none';
+  document.removeEventListener('click', hideTinyPopup);
+}
 </script>
+
+<!-- Tiny Popup Box -->
+<div id="tinyPopup" style="display:none; position:fixed; z-index:9999; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px; box-shadow:0 8px 24px rgba(0,0,0,0.15);">
+  <img id="tinyPopupImg" src="" style="max-width:200px; max-height:200px; object-fit:cover; border-radius:4px; display:block;">
+  <span id="tinyPopupNoImg" style="display:none; color:var(--text-muted); font-size:13px; font-weight:500; text-align:center; padding:20px;">Belum ada foto</span>
+</div>
 
 <?php echo view('templates/dashboard_footer'); ?>

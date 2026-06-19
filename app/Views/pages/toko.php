@@ -1,18 +1,47 @@
 <style>
-  /* ========== TOKO LIST PAGE ========== */
+  /* ========== TOKO LIST PAGE (GLASSMORPHISM) ========== */
   #tokoPage {
-    padding-top: 100px;
+    padding-top: 120px;
     padding-bottom: 80px;
-    background: var(--surface-2);
+    background: #05060f; /* Dark background from landing page */
     min-height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
 
+  /* Decorative glow */
+  #tokoPage::before {
+    content: '';
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 60%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .lp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Filter Bar Glassmorphism */
   .toko-filter-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 28px;
+    gap: 16px;
+    margin-bottom: 40px;
     align-items: center;
+    background: rgba(15,23,42,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .search-input-wrap {
@@ -23,188 +52,200 @@
 
   .search-input-wrap i {
     position: absolute;
-    left: 14px;
+    left: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-muted);
+    color: #94a3b8;
     font-size: 14px;
   }
 
   .search-input-wrap input {
     width: 100%;
-    padding: 12px 14px 12px 42px;
-    font-family: var(--font-body);
+    padding: 14px 16px 14px 46px;
+    font-family: var(--font-body, 'Inter', sans-serif);
     font-size: 14px;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
     outline: none;
-    transition: all var(--transition-fast);
-    color: var(--text-primary);
+    transition: all 0.2s ease;
+    color: #f8fafc;
   }
-
+  .search-input-wrap input::placeholder { color: #64748b; }
   .search-input-wrap input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+    border-color: #60a5fa;
+    background: rgba(96,165,250,0.05);
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
   }
 
   .filter-select-pub {
-    padding: 12px 36px 12px 14px;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    font-family: var(--font-body);
+    padding: 14px 40px 14px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    font-family: var(--font-body, 'Inter', sans-serif);
     font-size: 14px;
-    color: var(--text-primary);
+    color: #f8fafc;
     outline: none;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-position: right 16px center;
     -webkit-appearance: none;
   }
-
   .filter-select-pub:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
   }
+  .filter-select-pub option { background: #0f172a; color: #f8fafc; }
 
+  .btn-filter {
+    padding: 14px 24px;
+    background: #60a5fa;
+    color: #0f172a;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-filter:hover { background: #3b82f6; transform: translateY(-2px); box-shadow: 0 8px 16px rgba(96,165,250,0.3); }
+
+  .btn-reset {
+    padding: 14px 20px;
+    background: rgba(251,113,133,0.1);
+    color: #fb7185;
+    border: 1px solid rgba(251,113,133,0.3);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { background: rgba(251,113,133,0.2); }
+
+  /* Store Cards (Glassmorphism) */
   .stores-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
   }
 
-  .store-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
+  .showcase-card {
+    background: rgba(30,41,59,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
     overflow: hidden;
-    transition: all var(--transition-smooth);
     display: flex;
     flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(12px);
+  }
+  .showcase-card:hover {
+    background: rgba(51,65,85,0.6);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.5);
   }
 
-  .store-card:hover {
-    border-color: var(--primary-light);
-    box-shadow: 0 16px 48px rgba(37,99,235,0.12);
-    transform: translateY(-5px);
-  }
-
-  .store-card-img {
-    height: 160px;
-    background: linear-gradient(135deg, #0F172A, #1E3A5F);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .showcase-img {
+    height: 180px;
     position: relative;
     overflow: hidden;
+    background: #0f172a;
   }
-
-  .store-card-img img {
+  .showcase-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s;
   }
-
-  .store-cat-badge {
+  .showcase-card:hover .showcase-img img { transform: scale(1.05); }
+  
+  .img-overlay {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(37,99,235,0.9);
-    color: #fff;
-    backdrop-filter: blur(8px);
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,1) 0%, transparent 80%);
   }
 
-  .store-card-body {
-    padding: 18px;
-    flex: 1;
+  .showcase-body {
+    padding: 24px;
     display: flex;
     flex-direction: column;
+    flex: 1;
   }
-
-  .store-card-name {
-    font-family: var(--font-display);
-    font-size: 16px;
+  .showcase-cat {
+    font-size: 12px;
+    font-weight: 700;
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .showcase-name {
+    font-family: var(--font-display, 'Outfit', sans-serif);
+    font-size: 20px;
     font-weight: 800;
-    color: var(--text-primary);
-    margin-bottom: 6px;
+    color: #f8fafc;
+    margin-bottom: 12px;
     line-height: 1.3;
   }
-
-  .store-card-addr {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-bottom: 10px;
+  .showcase-addr {
     display: flex;
     align-items: flex-start;
-    gap: 6px;
-  }
-
-  .store-card-addr i { color: var(--primary); margin-top: 2px; flex-shrink: 0; }
-
-  .store-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: auto;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
-
-  .store-card-rating {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .store-card-rating i { color: #F59E0B; }
-
-  .store-card-cta {
-    margin-top: 14px;
-    display: flex;
     gap: 8px;
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 16px;
   }
-
-  .btn-view-map {
+  .store-meta {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: var(--primary-10);
-    color: var(--primary);
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 600;
-    transition: all var(--transition-fast);
-    flex: 1;
+    gap: 16px;
+    margin-bottom: 24px;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  .showcase-link {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    border: 1px solid rgba(37,99,235,0.2);
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f8fafc;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 20px;
+    border-radius: 99px;
+    width: 100%;
+    transition: all 0.3s;
+  }
+  .showcase-link:hover {
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
+    box-shadow: 0 4px 16px rgba(96,165,250,0.4);
   }
 
-  .btn-view-map:hover {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
-  }
-
+  /* No Results */
   .no-results {
     grid-column: 1/-1;
     text-align: center;
-    padding: 60px 24px;
-    color: var(--text-muted);
+    padding: 80px 24px;
+    background: rgba(15,23,42,0.4);
+    border-radius: 24px;
+    border: 1px dashed rgba(255,255,255,0.15);
   }
+  .no-results i { font-size: 48px; color: #475569; margin-bottom: 16px; display: block; }
+  .no-results h3 { color: #f8fafc; font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .no-results p { color: #94a3b8; font-size: 14px; }
 
-  .no-results i { font-size: 48px; display: block; margin-bottom: 12px; }
-
-  /* ========== PAGINATION ========== */
+  /* Pagination */
   .pagination {
     display: flex;
     padding-left: 0;
@@ -218,35 +259,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 42px;
-    height: 42px;
+    min-width: 44px;
+    height: 44px;
     padding: 0 14px;
-    background: var(--surface);
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.05);
+    color: #cbd5e1;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
     font-size: 14px;
-    font-weight: 600;
-    font-family: var(--font-body);
-    transition: all var(--transition-fast);
+    font-weight: 700;
+    transition: all 0.2s;
   }
   .pagination li a:hover {
-    background: rgba(37,99,235,0.1);
-    color: var(--primary);
-    border-color: var(--primary-light);
-    transform: translateY(-2px);
+    background: rgba(96,165,250,0.1);
+    color: #60a5fa;
+    border-color: rgba(96,165,250,0.3);
   }
   .pagination li.active a,
   .pagination li.active span {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
-  }
-  .pagination li.disabled a,
-  .pagination li.disabled span {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: var(--surface-2);
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
   }
 
   @media (max-width: 600px) {
@@ -257,121 +290,106 @@
 </style>
 
 <!-- ================================================
-     DAFTAR TOKO
+     DAFTAR TOKO (REDESIGN)
 ================================================ -->
 <section id="tokoPage">
-  <div class="container">
+  <div class="lp-container">
 
-    <!-- Header -->
-    <div style="margin-bottom:28px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-        <div>
-          <h1 style="font-family:var(--font-display);font-size:clamp(26px,3.5vw,36px);font-weight:900;color:var(--text-primary);">
-            Daftar Toko Elektronik
-          </h1>
-          <p style="color:var(--text-secondary);font-size:15px;margin-top:4px;">
-            <?php echo count($stores); ?> toko ditemukan di Kisaran, Asahan, Sumatera Utara
-          </p>
-        </div>
-        <a href="<?php echo base_url('peta'); ?>" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--primary);color:#fff;border-radius:var(--radius-md);font-weight:700;font-size:14px;transition:all var(--transition-smooth);"
-           onmouseover="this.style.background='var(--primary-dark)'"
-           onmouseout="this.style.background='var(--primary)'">
-          <i class="fas fa-map"></i> Lihat di Peta
+    <!-- Header & Back Button -->
+    <div style="margin-bottom:32px; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+      <div>
+        <a href="<?= base_url('#beranda') ?>" style="display:inline-flex; align-items:center; gap:8px; color:#94a3b8; font-size:14px; font-weight:600; margin-bottom:16px; transition:color 0.2s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='#94a3b8'">
+          <i class="fas fa-arrow-left"></i> Kembali ke Beranda
         </a>
+        <h1 style="font-family:var(--font-display, 'Outfit', sans-serif); font-size:clamp(32px, 4vw, 44px); font-weight:900; color:#f8fafc; line-height:1.1;">
+          Daftar Toko Elektronik
+        </h1>
+        <p style="color:#cbd5e1; font-size:15px; margin-top:8px;">
+          <?= count($stores) ?> toko ditemukan di Kisaran, Asahan, Sumatera Utara
+        </p>
       </div>
+      <a href="<?= base_url('peta') ?>" style="display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:#60a5fa; color:#0f172a; border-radius:99px; font-weight:700; font-size:15px; transition:all 0.3s;" onmouseover="this.style.background='#3b82f6';this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#60a5fa';this.style.transform='translateY(0)';">
+        <i class="fas fa-map"></i> Lihat di Peta
+      </a>
     </div>
 
     <!-- Filter Bar -->
-    <form method="get" action="<?php echo current_url(); ?>" class="toko-filter-bar">
+    <form method="get" action="<?= current_url() ?>" class="toko-filter-bar" data-aos="fade-up">
       <div class="search-input-wrap">
         <i class="fas fa-search"></i>
-        <input type="text" name="q" placeholder="Cari nama toko, alamat..."
-               value="<?php echo esc($q); ?>">
+        <input type="text" name="q" placeholder="Cari nama toko, alamat..." value="<?= esc($q) ?>">
       </div>
       <select name="kategori" class="filter-select-pub" onchange="this.form.submit()">
         <option value="">Semua Kategori</option>
         <?php foreach ($kategoris as $k): ?>
-          <option value="<?php echo $k; ?>"
-            <?php echo ($kategori === $k) ? 'selected' : ''; ?>>
-            <?php echo $k; ?>
-          </option>
+          <option value="<?= $k ?>" <?= ($kategori === $k) ? 'selected' : '' ?>><?= $k ?></option>
         <?php endforeach; ?>
       </select>
-      <button type="submit" style="padding:12px 22px;background:var(--primary);color:#fff;border-radius:var(--radius-md);font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:var(--font-body);">
+      <select name="kota" class="filter-select-pub" onchange="this.form.submit()">
+        <option value="">Semua Kota</option>
+        <?php foreach ($kotas as $k): ?>
+          <option value="<?= esc($k) ?>" <?= ($kota === $k) ? 'selected' : '' ?>><?= esc($k) ?></option>
+        <?php endforeach; ?>
+      </select>
+      <button type="submit" class="btn-filter">
         <i class="fas fa-filter"></i> Filter
       </button>
-      <?php if (!empty($q) || !empty($kategori)): ?>
-        <a href="<?php echo base_url('toko'); ?>" style="padding:12px 18px;background:var(--surface-3);color:var(--text-secondary);border-radius:var(--radius-md);font-size:13px;font-weight:600;">
+      <?php if (!empty($q) || !empty($kategori) || !empty($kota)): ?>
+        <a href="<?= base_url('toko') ?>" class="btn-reset">
           <i class="fas fa-times"></i> Reset
         </a>
       <?php endif; ?>
     </form>
 
     <!-- Store Cards -->
-    <div class="stores-grid">
+    <div class="stores-grid" data-aos="fade-up" data-aos-delay="100">
       <?php if (empty($stores)): ?>
         <div class="no-results">
           <i class="fas fa-store-slash"></i>
-          <h3 style="font-size:18px;font-weight:700;margin-bottom:8px;">Tidak ada toko ditemukan</h3>
-          <p>Coba ubah kata kunci atau filter kategori.</p>
-          <a href="<?php echo base_url('toko'); ?>" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:var(--primary);color:#fff;border-radius:var(--radius-md);font-weight:600;font-size:14px;">
-            Lihat Semua Toko
+          <h3>Tidak ada toko ditemukan</h3>
+          <p>Coba ubah kata kunci pencarian atau filter kategori lainnya.</p>
+          <a href="<?= base_url('toko') ?>" style="display:inline-flex; align-items:center; gap:8px; margin-top:20px; padding:12px 24px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#f8fafc; border-radius:12px; font-weight:600; font-size:14px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+            Reset Pencarian
           </a>
         </div>
       <?php else: ?>
         <?php foreach ($stores as $t): ?>
-        <div class="store-card" data-aos="fade-up">
+        <div class="showcase-card">
           <!-- Image -->
-          <div class="store-card-img">
+          <div class="showcase-img">
             <?php if (!empty($t['foto'])): ?>
-              <img src="<?php echo base_url('foto/'.$t['foto']); ?>" alt="<?php echo esc($t['nama_toko']); ?>">
+              <img src="<?= base_url('foto/'.$t['foto']) ?>" alt="<?= esc($t['nama_toko']) ?>">
             <?php else: ?>
-              <i class="fas fa-store" style="font-size:44px;color:rgba(255,255,255,0.2);"></i>
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:rgba(255,255,255,0.1);">
+                <i class="fas fa-store"></i>
+              </div>
             <?php endif; ?>
-            <div class="store-cat-badge"><?php echo esc($t['kategori']); ?></div>
+            <div class="img-overlay"></div>
           </div>
 
           <!-- Body -->
-          <div class="store-card-body">
-            <h3 class="store-card-name"><?php echo esc($t['nama_toko']); ?></h3>
-            <div class="store-card-addr">
-              <i class="fas fa-location-dot"></i>
-              <?php echo esc($t['alamat']); ?>
+          <div class="showcase-body">
+            <div class="showcase-cat"><?= esc($t['kategori']) ?></div>
+            <div class="showcase-name"><?= esc($t['nama_toko']) ?></div>
+            
+            <div class="showcase-addr">
+              <i class="fas fa-location-dot" style="color:#60a5fa;margin-top:2px;flex-shrink:0;"></i>
+              <?= esc($t['alamat']) ?>
             </div>
 
-            <?php if (!empty($t['jam_buka'])): ?>
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
-              <i class="fas fa-clock" style="color:var(--primary);margin-right:4px;"></i>
-              <?php echo esc($t['jam_buka']); ?>
-            </div>
-            <?php endif; ?>
-
-            <div class="store-card-meta">
-              <div class="store-card-rating">
-                <i class="fas fa-star"></i>
-                <strong><?php echo $t['rating']; ?></strong>
-                <span>(<?php echo $t['total_ulasan']; ?>)</span>
-              </div>
-              <?php if (!empty($t['no_telepon'])): ?>
-              <div>
-                <i class="fas fa-phone" style="color:var(--primary);margin-right:4px;"></i>
-                <?php echo esc($t['no_telepon']); ?>
-              </div>
+            <div class="store-meta">
+              <?php if (!empty($t['jam_buka'])): ?>
+                <div><i class="fas fa-clock" style="color:#f87171;margin-right:4px;"></i> <?= esc($t['jam_buka']) ?></div>
               <?php endif; ?>
+              <div>
+                <i class="fas fa-star" style="color:#f59e0b;margin-right:4px;"></i> 
+                <strong style="color:#f8fafc;"><?= $t['rating'] ?></strong> (<?= $t['total_ulasan'] ?>)
+              </div>
             </div>
 
-            <div class="store-card-cta">
-              <a href="<?php echo base_url('toko/'.$t['id']); ?>" class="btn-view-map">
-                <i class="fas fa-info-circle"></i> Detail
-              </a>
-              <a href="<?php echo base_url('peta?lat='.$t['latitude'].'&lng='.$t['longitude']); ?>"
-                 title="Lihat di Peta"
-                 style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-muted);transition:all var(--transition-fast);"
-                 onmouseover="this.style.background='var(--primary)';this.style.color='#fff'"
-                 onmouseout="this.style.background='var(--surface-2)';this.style.color='var(--text-muted)'">
-                <i class="fas fa-map-pin"></i>
-              </a>
-            </div>
+            <a href="<?= base_url('toko/'.$t['id']) ?>" class="showcase-link">
+              Lihat Detail <i class="fas fa-arrow-right"></i>
+            </a>
           </div>
         </div>
         <?php endforeach; ?>
@@ -380,8 +398,8 @@
 
     <!-- Pagination -->
     <?php if ($pager): ?>
-      <div style="margin-top: 50px; display: flex; justify-content: center;">
-        <?php echo $pager->links('stores', 'default_full'); ?>
+      <div style="margin-top: 64px; display: flex; justify-content: center;" data-aos="fade-up">
+        <?= $pager->links('stores', 'default_full') ?>
       </div>
     <?php endif; ?>
 

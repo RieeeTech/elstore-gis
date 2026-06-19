@@ -35,13 +35,43 @@ table.dataTable thead th, table.dataTable thead td {
 table.dataTable.no-footer {
   border-bottom: 1px solid var(--border);
 }
+@media (max-width: 600px) {
+  .dataTables_wrapper .dt-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .dataTables_wrapper .dt-buttons .dt-button {
+    flex: 1 1 calc(50% - 8px);
+    margin: 0 !important;
+    text-align: center;
+    padding: 10px;
+  }
+  .dataTables_wrapper .dataTables_filter {
+    float: none;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  .dataTables_wrapper .dataTables_filter input {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  .dataTables_wrapper .dataTables_length {
+    float: none;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+}
 </style>
 <div class="section-head" style="margin-bottom:20px;">
   <h1 style="font-family:var(--font-display);font-size:22px;font-weight:900;">Laporan & Statistik</h1>
 </div>
 
 <!-- Summary Stats -->
-<div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+<div class="stats-grid">
   <div class="stat-card" style="--card-color:#2563EB;">
     <div class="stat-icon" style="background:#EFF6FF;color:#2563EB;"><i class="fas fa-store"></i></div>
     <div class="stat-value"><?php echo $total_toko; ?></div>
@@ -64,7 +94,7 @@ table.dataTable.no-footer {
   <div class="dash-card-header">
     <span class="dash-card-title"><i class="fas fa-list" style="color:var(--primary);margin-right:8px;"></i>Detail Semua Toko</span>
   </div>
-  <div style="padding:24px; overflow-x:auto;">
+  <div style="padding:24px;">
     <table id="laporanTable" class="display nowrap" style="width:100%">
       <thead>
         <tr>
@@ -123,7 +153,8 @@ table.dataTable.no-footer {
     $totalAll = array_sum(array_column($per_kategori, 'total'));
     $colors = ['#2563EB','#22C55E','#F59E0B','#EF4444','#6366F1','#06B6D4','#EC4899','#14B8A6','#F97316'];
     ?>
-    <table>
+    <div class="table-wrap">
+      <table>
       <thead>
         <tr>
           <th>#</th>
@@ -159,6 +190,7 @@ table.dataTable.no-footer {
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
 
@@ -178,6 +210,7 @@ table.dataTable.no-footer {
 <script>
 $(document).ready(function() {
     $('#laporanTable').DataTable({
+        scrollX: true,
         dom: 'Bfrtip',
         buttons: [
             {
@@ -197,6 +230,7 @@ $(document).ready(function() {
                 extend: 'pdfHtml5',
                 text: '<i class="fas fa-file-pdf"></i> Export PDF',
                 title: 'Laporan Data Toko ELStore GIS',
+                messageTop: 'Dicetak pada: ' + new Date().toLocaleDateString('id-ID'),
                 orientation: 'landscape',
                 pageSize: 'A4',
                 exportOptions: {
@@ -221,9 +255,15 @@ $(document).ready(function() {
                 customize: function(doc) {
                     doc.styles.title = {
                         color: '#1e293b',
-                        fontSize: '20',
+                        fontSize: 24,
                         alignment: 'center',
                         bold: true,
+                        margin: [0, 0, 0, 5]
+                    };
+                    doc.styles.message = {
+                        color: '#64748b',
+                        fontSize: 12,
+                        alignment: 'center',
                         margin: [0, 0, 0, 20]
                     };
                     doc.styles.tableHeader = {
@@ -233,10 +273,19 @@ $(document).ready(function() {
                         bold: true,
                         margin: [0, 5, 0, 5]
                     };
-                    // Set proportional widths for all 9 columns
-                    doc.content[1].table.widths = ['auto','auto','*','*','*','auto','auto','auto','auto'];
                     
-                    var body = doc.content[1].table.body;
+                    var tableIdx = 1;
+                    for (var i = 0; i < doc.content.length; i++) {
+                        if (doc.content[i].table) {
+                            tableIdx = i;
+                            break;
+                        }
+                    }
+
+                    // Set proportional widths for all 9 columns
+                    doc.content[tableIdx].table.widths = ['auto','auto','*','*','*','auto','auto','auto','auto'];
+                    
+                    var body = doc.content[tableIdx].table.body;
                     for (var i = 1; i < body.length; i++) {
                         var cellData = body[i][1];
                         if (cellData && cellData.text && cellData.text.toString().indexOf('[IMG_BASE64:') === 0) {
@@ -254,30 +303,49 @@ $(document).ready(function() {
             {
                 extend: 'print',
                 text: '<i class="fas fa-print"></i> Cetak Tabel',
-                title: '<div style="text-align:center; margin-bottom:20px;"><h2 style="color:#1e293b; margin:0;">Laporan Data Toko ELStore GIS</h2><p style="color:#64748b; margin-top:5px; font-size:14px;">Dicetak pada: '+new Date().toLocaleDateString('id-ID')+'</p></div>',
+                title: '',
+                messageTop: '',
                 exportOptions: {
                     stripHtml: false
                 },
                 customize: function (win) {
-                    $(win.document.body).css('font-family', 'sans-serif').css('background', '#fff');
-                    $(win.document.body).find('table')
-                        .addClass('compact')
-                        .css('font-size', '13px')
-                        .css('border-collapse', 'collapse')
-                        .css('width', '100%');
-                    $(win.document.body).find('th, td')
-                        .css('border', '1px solid #cbd5e1')
-                        .css('padding', '10px');
-                    $(win.document.body).find('th')
-                        .css('background-color', '#2563eb')
-                        .css('color', '#ffffff')
-                        .css('font-weight', '700');
-                    $(win.document.body).find('img')
-                        .css('border-radius', '4px')
-                        .css('width', '40px').css('height', '40px').css('object-fit', 'cover');
+                    var body = $(win.document.body);
                     
-                    // Hide header action/print button if exists in body
-                    $(win.document.body).find('.section-head, .dt-buttons, .dataTables_filter, .dataTables_info, .dataTables_paginate').css('display', 'none');
+                    // Remove any DataTables generated headers
+                    body.find('h1').remove();
+                    
+                    // Inject our own full-width centered header
+                    var headerHtml = '<div style="display:block; width:100%; text-align:center; margin-bottom:20px; border-bottom:2px solid #e2e8f0; padding-bottom:15px;">' +
+                                     '<h1 style="margin:0; font-size:26px; color:#1e293b; font-family:sans-serif;">Laporan Data Toko ELStore GIS</h1>' +
+                                     '<p style="margin:8px 0 0 0; font-size:14px; color:#64748b; font-family:sans-serif;">Dicetak pada: ' + new Date().toLocaleDateString('id-ID') + '</p>' +
+                                     '</div>';
+                    body.prepend(headerHtml);
+
+                    // Inject strong CSS rules
+                    var css = '@media print { @page { size: landscape !important; margin: 15mm !important; } } ' +
+                              '@page { size: landscape; margin: 15mm; } ' +
+                              'body, .dt-print-view { display: block !important; flex-direction: column !important; font-family: Arial, sans-serif; background: #fff; margin: 0; padding: 0; } ' +
+                              'table { width: 100% !important; border-collapse: collapse !important; margin-top: 20px; } ' +
+                              'th, td { border: 1px solid #cbd5e1 !important; padding: 8px 10px !important; text-align: left; } ' +
+                              'th { background-color: #2563eb !important; color: #ffffff !important; font-weight: bold !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } ' +
+                              'img { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; }';
+                    
+                    var head = win.document.head || win.document.getElementsByTagName('head')[0];
+                    var style = win.document.createElement('style');
+                    style.type = 'text/css';
+                    style.media = 'print';
+                    if (style.styleSheet) {
+                        style.styleSheet.cssText = css;
+                    } else {
+                        style.appendChild(win.document.createTextNode(css));
+                    }
+                    head.appendChild(style);
+                    
+                    // Clean up UI elements
+                    body.find('.section-head, .dt-buttons, .dataTables_filter, .dataTables_info, .dataTables_paginate').remove();
+                    
+                    // Reset table class to remove conflicting styles
+                    body.find('table').removeClass('dataTable no-footer display nowrap');
                 }
             }
         ],

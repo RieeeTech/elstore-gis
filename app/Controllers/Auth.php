@@ -223,7 +223,7 @@ class Auth extends BaseController
         // Hapus semua session data
         session()->destroy();
 
-        $redirect = $this->request->getGet('redirect') ?: base_url('auth/login');
+        $redirect = $this->request->getGet('redirect') ?: base_url('/');
         return redirect()->to($redirect)
                          ->with('success', 'Anda telah berhasil keluar.');
     }

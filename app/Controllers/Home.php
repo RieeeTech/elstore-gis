@@ -47,7 +47,7 @@ class Home extends BaseController
         ];
 
         return view('templates/header', $data)
-             . view('pages/home', $data)
+             . view('pages/home_redesign', $data)
              . view('templates/footer', $data);
     }
 
@@ -61,6 +61,9 @@ class Home extends BaseController
             $this->request->getGet('kota') ?? ''
         );
 
+        $kotaData = $this->tokoModel->getUniqueCities();
+        $kotas    = array_column($kotaData, 'kota');
+
         $data = [
             'page_title' => 'Daftar Toko Elektronik',
             'lang'       => session()->get('lang') ?? 'id',
@@ -68,11 +71,13 @@ class Home extends BaseController
             'pager'      => $model->pager,
             'q'          => $this->request->getGet('q') ?? '',
             'kategori'   => $this->request->getGet('kategori') ?? '',
+            'kota'       => $this->request->getGet('kota') ?? '',
             'kategoris'  => [
                 'Smartphone', 'Komputer & Laptop', 'Audio & Video',
                 'Peralatan Listrik', 'Elektronik Umum', 'Apple Authorized',
                 'Gaming', 'Kamera & Optik', 'Lainnya',
             ],
+            'kotas'      => $kotas,
         ];
 
         return view('templates/header', $data)
